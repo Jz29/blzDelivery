@@ -1,0 +1,51 @@
+{
+    
+    "users":{
+        "user-attendant-Id-32123123123":{
+            "tipo":"client",
+            "nome":"nome do usuario",
+            "email":"033222333",
+            "telefone-01":"",
+            "telefone-02":"",
+            "endereco":{
+                "local-now":""
+            }
+            
+        }
+    },
+
+    "users-client":{
+        "user-client-Id-32123123123":{
+            "pedidos-List":["pedido-Id-00110011"],
+            "avaliacoes":[]
+        }
+    },
+
+    "users-attendant":{
+        "pedidos":["pedido-Id-00110011"],
+        "servicos":["servico-Id-909090"],
+        "avaliacoes":[]
+    },
+
+    "servicos":{
+        "servico-Id-909090":{
+            "tipo":"cabelo",
+            "preco":40.50
+        }
+    },
+
+    "pedidos":{
+        "pedido-Id-00110011":{
+            "users-attendant":"user-attendant-Id-32123123123",
+            "users-client":"user-client-Id-32123123123",
+            "servico-Id":"servico-Id-909090",
+            "preco":"50.0",
+            "avaliacao":{
+                "nota":"",
+                "comentario":""
+            }
+        }
+    }
+
+
+}

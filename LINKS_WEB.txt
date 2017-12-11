@@ -1,0 +1,6 @@
+npm install --save @ionic-native/push
+
+$ ionic cordova plugin add cordova-plugin-fcm
+$ npm install --save @ionic-native/fcm
+
+ionic cordova plugin add de.appplant.cordova.plugin.local-notification
