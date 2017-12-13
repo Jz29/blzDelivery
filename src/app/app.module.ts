@@ -23,7 +23,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Push} from '@ionic-native/push';
 import { FCM } from '@ionic-native/fcm';
 import { LocalNotifications } from '@ionic-native/local-notifications';
-
+// import { GoogleMaps } from '@ionic-native/google-maps';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth} from 'angularfire2/auth';
@@ -54,7 +54,7 @@ var config = {
     TabsAtendentePage,
     CriarservicoPage,
     ListaatendimentoPage,
-    PedidosClientePage
+    PedidosClientePage,
 
   ],
   imports: [
@@ -77,13 +77,13 @@ var config = {
     CriarservicoPage,
     CriarPedidosPage,
     ListaatendimentoPage,
-    PedidosClientePage
+    PedidosClientePage,
 
   ],
   providers: [
     LocalNotifications,
     FCM,
-    Push, 
+    Push,
     StatusBar,
     SplashScreen,
     AngularFireAuth,

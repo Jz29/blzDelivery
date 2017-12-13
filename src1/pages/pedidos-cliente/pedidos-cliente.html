@@ -1,0 +1,52 @@
+<!--
+  Generated template for the PedidosClientePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+  <button style="text-align : left" (click)="statusPedido()" float-left ion-button icon-only>
+      <ion-icon  name="reorder"></ion-icon>
+  </button>
+</ion-header>
+
+
+<ion-content>
+  
+  <ion-content  *ngIf='msg'>
+    <ion-item> 
+        <ion-title>Nenhum pedido foi encontrado !</ion-title>
+        <p>  Faça já seu pedido e aproveite !</p>       
+    </ion-item>
+  </ion-content>
+
+  
+  <ion-title>{{msgtext}}</ion-title>
+  <ion-list *ngFor = "let pedido of pedidos">
+    
+    <ion-card>
+        <ion-item>
+          <ion-title > Tipo : {{pedido.tipo}} </ion-title>
+        </ion-item>
+
+        <ion-item>
+            <h2>Atendente:</h2>
+            <p>{{pedido.atendente}}</p>
+            <h2>Preço: </h2>
+            <p>R$ {{pedido.preco}}</p>
+            <h2>Data:</h2>
+            <p> {{pedido.data}}</p>
+        </ion-item>
+
+        <ion-item>
+          <span item-left>Horario : {{pedido.horario}} </span>
+          <button  [disabled]=status (click)=cancelarPedido(pedido) ion-button icon-left clear item-end>
+            <ion-icon  name="remove-circle"></ion-icon>
+            cancelar
+          </button>
+        </ion-item>
+      </ion-card>
+  </ion-list>
+        
+</ion-content>

@@ -21,20 +21,20 @@ export class CriarPedidosPage {
   horario;
   data;
   status;
-  regiao; cep; quadra; numero; referencia; 
+  regiao; cep; quadra; numero; referencia;
   idservico;
   nome;
   minDate;
   minHorario;
-  constructor(public events: Events, private alertCtrl: AlertController, public auth:AuthProvider, public navCtrl: NavController, public navParams: NavParams) {  
-    //this.getDataMin();          
+  constructor(public events: Events, private alertCtrl: AlertController, public auth:AuthProvider, public navCtrl: NavController, public navParams: NavParams) {
+    //this.getDataMin();
     this.servico = this.navParams.get("servicoId");
   }
 
 
 
   ionViewDidLoad() {
-    this.getDataMin();      
+    this.getDataMin();
     this.data = "";
     this.horario = "";
     this.getAtendenteNome();
@@ -62,7 +62,7 @@ export class CriarPedidosPage {
   }
 
   verificarDataValida(){
-  
+
     var date = new Date();
     var aux = new Date();
     var atual ,prox;
@@ -71,7 +71,7 @@ export class CriarPedidosPage {
     date.setDate(this.data.slice(8,10))
     date.setHours(this.horario.slice(0,2));
     date.setMinutes(this.horario.slice(3,5));
-    
+
     var aatual = parseInt(aux.getFullYear().toString());
     var aprox=  parseInt( date.getFullYear().toString())
     if(aatual > aprox){
@@ -86,7 +86,7 @@ export class CriarPedidosPage {
         return false;
       }
     }
-    console.log("Mes")    
+    console.log("Mes")
     var datual = parseInt(aux.getDate().toString());
     var dprox=  parseInt( date.getDate().toString())
     if(matual == mprox){
@@ -95,7 +95,7 @@ export class CriarPedidosPage {
       }
     }
     console.log("Dia")
-    
+
     var a = parseInt(aux.getHours().toString())
     var p = parseInt(date.getHours().toString())
     if( datual == dprox){
@@ -103,31 +103,31 @@ export class CriarPedidosPage {
         return false;
       }
     }
-    console.log("Hora")    
+    console.log("Hora")
     return true;
 
     //console.log("Mes")
-    
+
     //console.log("Dia Atual:",atual);
    // console.log("Dia prox", prox);
-   
+
     //console.log("Prox:" + prox ,"-", "atual",atual);
-    
+
     /*
-    
+
     if( atual <= prox ){
-      
+
       console.log("Data entrou")
       if(atual == prox){
         console.log("Data  igual entrou")
-       
+
         if(a > p ){
           console.log("hora errada")
           return false;
         }
 
-      }  
-      return true; 
+      }
+      return true;
 
     }else{
       console.log("bye")
@@ -139,7 +139,7 @@ export class CriarPedidosPage {
   loadEnderecoData(){
     var database = this.auth.getDataBase("users","data");
     database.on("value", (snapshot)=> {
-  
+
       var end = snapshot.val().endereco;
       if(end != null){
         this.regiao = end.regiao;
@@ -161,7 +161,7 @@ export class CriarPedidosPage {
       this.erroData();
       return;
     }
-    
+
     /*
     if(!this.verificarDataValida()){
       console.log("Data Invalida");
@@ -169,8 +169,8 @@ export class CriarPedidosPage {
       return;
     }
     */
-    
-    
+
+
     this.salvarPedido();
     let alert = this.alertCtrl.create({
       title: 'Novo pedido' ,
@@ -185,13 +185,13 @@ export class CriarPedidosPage {
         }]
     });
     alert.present();
-    
-    
+
+
   }
 
 
   erroData(){
-    
+
      let alert = this.alertCtrl.create({
        title: 'ERRO !' ,
        subTitle: 'Verifique se a data e horario são validos !',
@@ -203,18 +203,18 @@ export class CriarPedidosPage {
          }]
      });
      alert.present();
-     
-     
+
+
    }
 
   salvarPedido(){
-    
+
     //console.log(this.nome);
-    
-    //var newPostKey = this.auth.getDataBaseListChild("pedidosfeitos").push().key;    
-    
+
+    //var newPostKey = this.auth.getDataBaseListChild("pedidosfeitos").push().key;
+
     var key = this.auth.usuarioId();
-    
+
 
     var endereco = {
       regiao:this.regiao,
@@ -223,7 +223,7 @@ export class CriarPedidosPage {
       numero: this.numero,
       referencia:this.referencia
     };
-    
+
     var servico = {
       status:"Marcado",
       tipo:this.servico.tipo,
@@ -234,22 +234,23 @@ export class CriarPedidosPage {
       servicoid : this.servico.id,
       atendenteId: this.servico.userId,
       preco:this.servico.preco,
-      clienteId: key
-    } 
+      clienteId: key,
+      avaliacao: ""
+    }
 
     this.auth.getDataBaseListPedidos().push(servico).then(teste=>{
       var key = teste.key;
       this.salvarAtendente(key);
       this.salvarCliente(key);
     });
-    
-    
+
+
   }
 
   salvarAtendente(key){
     var end = "/users/" + this.servico.userId +"/pedidosAtender/";
     this.auth.getDataBaseEndereco(end).push(key);
-    
+
   }
 
   salvarCliente(key){
@@ -258,11 +259,11 @@ export class CriarPedidosPage {
 
 
   getAtendenteNome(){
-    
+
     var end = "/users/" + this.servico.userId +"/data/nome/";
     this.auth.getDataBaseEndereco(end).on("value",(snap)=>{
       this.nome = snap.val();
     });
-    
+
   }
 }

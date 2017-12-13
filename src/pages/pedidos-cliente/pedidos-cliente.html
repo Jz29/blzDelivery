@@ -6,29 +6,73 @@
 -->
 
 <ion-header>
-  <button style="text-align : left" (click)="statusPedido()" float-left ion-button icon-only>
-      <ion-icon  name="reorder"></ion-icon>
-  </button>
+  <ion-navbar>
+
+    <ion-buttons start>
+      <button ion-button icon-only clear color="dark" (click)="statusPedido()">
+        <ion-icon name="funnel"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Pedidos</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only clear color="dark" (click)="recaregar()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
 </ion-header>
 
-
 <ion-content>
-  
+
   <ion-content  *ngIf='msg'>
-    <ion-item> 
+    <ion-item>
         <ion-title>Nenhum pedido foi encontrado !</ion-title>
-        <p>  Faça já seu pedido e aproveite !</p>       
+        <p>  Faça já seu pedido e aproveite !</p>
     </ion-item>
   </ion-content>
 
-  
+
   <ion-title>{{msgtext}}</ion-title>
   <ion-list *ngFor = "let pedido of pedidos">
-    
+
     <ion-card>
         <ion-item>
-          <ion-title > Tipo : {{pedido.tipo}} </ion-title>
+          <ion-title>Tipo : {{pedido.tipo}}</ion-title>
         </ion-item>
+
+        <div *ngIf = " this.statuspedido == 'Feito' ">
+          <ion-row>
+            <ion-col col-auto>
+              <button ion-button (click)="avaliar(1, pedido)" color="{{this.cor[0]}}" clear icon-only>
+                <ion-icon name='star' is-active="false"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col col-auto>
+              <button ion-button (click)="avaliar(2, pedido)" color="{{this.cor[1]}}" clear icon-only>
+                <ion-icon name='star' is-active="false"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col col-auto>
+              <button ion-button (click)="avaliar(3, pedido)" color="{{this.cor[2]}}" clear icon-only>
+                <ion-icon name='star' is-active="false"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col col-auto>
+              <button ion-button (click)="avaliar(4, pedido)" color="{{this.cor[3]}}" clear icon-only>
+                <ion-icon name='star' is-active="false"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col col-auto>
+              <button ion-button (click)="avaliar(5, pedido)" color="{{this.cor[4]}}" clear icon-only>
+                <ion-icon name='star' is-active="false"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col col-auto>
+              {{pedido.avaliacao}}
+            </ion-col>
+          </ion-row>
+        </div>
 
         <ion-item>
             <h2>Atendente:</h2>
@@ -48,5 +92,5 @@
         </ion-item>
       </ion-card>
   </ion-list>
-        
+
 </ion-content>

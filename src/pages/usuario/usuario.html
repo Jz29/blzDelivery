@@ -1,8 +1,8 @@
 <!--
-  Generated template for the UsuarioPage page.
+Generated template for the UsuarioPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
+See http://ionicframework.com/docs/components/#navigation for more info on
+Ionic pages and navigation.
 -->
 <ion-header>
 
@@ -19,94 +19,102 @@
 
 
 <ion-content padding>
-  
+
   <ion-card>
     <ion-card-header>
       Seus Dados.
     </ion-card-header>
-      
-      <ion-list>
-        
-        <ion-item>
-          <ion-label stacked>Tipo: </ion-label>
-          <ion-input disabled="true" type="text" [(ngModel)]="user.tipo"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label stacked>Nome: </ion-label>
-          <ion-input type="text" [(ngModel)]="user.nome"></ion-input>
-        </ion-item>
-        
-        <ion-item>
-          <ion-label stacked>Telefone: </ion-label>
-          <ion-input type="text" [(ngModel)]="user.telefone"></ion-input>
-        </ion-item>
-        
-        <ion-item>
-          <ion-label stacked>Telefone auxiliar: </ion-label>
-          <ion-input type="text" [(ngModel)]="auxTelefone"></ion-input>
-        </ion-item>
-        
-        <ion-item>
-          <ion-label stacked>Email: </ion-label>
-          <ion-input disabled="true" type="text" [(ngModel)]="user.email"></ion-input>
-        </ion-item>
-        
-        <div padding>
-          <button ion-button color="primary" block (click)="atualizarDados(user)">Atualizar dados</button>
-        </div>
-        
-      </ion-list>
-    </ion-card>
+
+    <ion-list>
+
+      <ion-item>
+        <ion-label stacked>Tipo: </ion-label>
+        <ion-input disabled="true" type="text" [(ngModel)]="user.tipo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Nome: </ion-label>
+        <ion-input type="text" [(ngModel)]="user.nome"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Telefone: </ion-label>
+        <ion-input type="text" [(ngModel)]="user.telefone"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Telefone auxiliar: </ion-label>
+        <ion-input type="text" [(ngModel)]="auxTelefone"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Email: </ion-label>
+        <ion-input disabled="true" type="text" [(ngModel)]="user.email"></ion-input>
+      </ion-item>
+
+      <div padding>
+        <button ion-button color="primary" block (click)="atualizarDados(user)">Atualizar dados</button>
+      </div>
+
+    </ion-list>
+  </ion-card>
 
   <ion-card>
     <ion-card-header>
       Endereço
     </ion-card-header>
     <ion-list>
-      
-    <ion-item>
+
+      <ion-item>
         <ion-label >Regiao: </ion-label>
         <ion-select placeholder='{{regiao}}' [(ngModel)]="regiao">
-            <ion-option value="Norte">Norte</ion-option>
-            <ion-option value="Sul">Sul</ion-option>
-            <ion-option value="Taquaralto">Taquaralto</ion-option>
-            <ion-option value="Taquarusul">Taquarusul</ion-option>
+          <ion-option value="Norte">Norte</ion-option>
+          <ion-option value="Sul">Sul</ion-option>
+          <ion-option value="Taquaralto">Taquaralto</ion-option>
+          <ion-option value="Taquarusul">Taquarusul</ion-option>
         </ion-select>
-    </ion-item>
+      </ion-item>
       <ion-item>
         <ion-label stacked>Cep: </ion-label>
         <ion-input type="number" [(ngModel)]="cep"></ion-input>
       </ion-item>
-      
+
       <ion-item>
         <ion-label stacked>Quadra: </ion-label>
         <ion-input type="text" [(ngModel)]="quadra"></ion-input>
       </ion-item>
-      
+
       <ion-item>
         <ion-label stacked>Numero: </ion-label>
         <ion-input type="number" [(ngModel)]="numero"></ion-input>
       </ion-item>
       <ion-item>
-          <ion-label stacked>Complemento ou referencia: </ion-label>
-          <ion-input type="text" [(ngModel)]="referencia"></ion-input>
-        </ion-item>
+        <ion-label stacked>Complemento ou referencia: </ion-label>
+        <ion-input type="text" [(ngModel)]="referencia"></ion-input>
+      </ion-item>
     </ion-list>
+    <ion-item>
+      <a href={{this.localizacaoAtual}}>
+        <button ion-button (click)="localizacao()" icon-right full>
+          Localização
+          <ion-icon name="pin"></ion-icon>
+        </button>
+      </a>
+    </ion-item>
     <div>
-        <button ion-button color="primary" block (click)="salvarEndereco()">Salvar</button>
+      <button ion-button color="primary" block (click)="salvarEndereco()">Salvar</button>
     </div>
   </ion-card>
-  
+
   <ion-card>
-      <ion-card-header>
-          Senha
-      </ion-card-header>
-      <ion-list>
-        <div  >
-            <button ion-button color="primary" block (click)="redefinirSenha(user)">Redefinir senha</button>
-        </div>
-      </ion-list>
+    <ion-card-header>
+      Senha
+    </ion-card-header>
+    <ion-list>
+      <div  >
+        <button ion-button color="primary" block (click)="redefinirSenha(user)">Redefinir senha</button>
+      </div>
+    </ion-list>
   </ion-card>
- 
+
 
 </ion-content>

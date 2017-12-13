@@ -18,9 +18,10 @@ export class PedidosClientePage {
   msg;
   pedidos = [];
   pedido;
-  statuspedido
-  msgtext
+  statuspedido;
+  msgtext;
   status;
+  cor = ["cinza","cinza","cinza","cinza","cinza"]; // cinza
   constructor( public events: Events, public actionSheetCtrl: ActionSheetController, public auth:AuthProvider,public navCtrl: NavController, public navParams: NavParams) {
     this.status = false;
     this.init();
@@ -31,6 +32,18 @@ export class PedidosClientePage {
     this.events.subscribe('event:Reload-Pedidos-Cliente', ()=>{
       this.init();
     });
+  }
+
+  avaliar(estrelas: number, pedido) {
+    pedido.avaliacao = estrelas;
+    for(var i = 0; i < 5; i++) {
+      this.cor[i] = "cinza";
+    }
+    for(var i = 0; i < estrelas; i++) {
+      this.cor[i] = "gold";
+    }
+
+    // console.log(this.cor);
   }
 
   init(){
@@ -47,7 +60,7 @@ export class PedidosClientePage {
       for (var item in snapshots.val()) {
         //console.log(snapshots.val()[item]);
         this.getPedidosFromDatabase(snapshots.val()[item]);
-      
+
       }
       if(snapshots.val() == null){
         this.msg = true;
@@ -58,10 +71,10 @@ export class PedidosClientePage {
   getPedidosFromDatabase(id){
     var end = "/Pedidos/"+ id;
     this.auth.getDataBaseEnd(end).on("value",(snap)=>{
-      
+
       var i=0;
       if(this.statuspedido == snap.val().status){
-        
+
         var data= {
           status:snap.val().status,
           key: snap.key,
@@ -83,8 +96,8 @@ export class PedidosClientePage {
       }else{
         this.msgtext = '';
       }
-      
-      
+
+
       /*
       this.servicos.push({
         id:id,
@@ -94,12 +107,12 @@ export class PedidosClientePage {
         tipo : snap.val().tipo,
         userId:snap.val().userid,
         });
-    
+
     */
       });
-    
+
     }
-  
+
     statusPedido(){
       let actionSheet = this.actionSheetCtrl.create({
         title: 'Status do Pedido',

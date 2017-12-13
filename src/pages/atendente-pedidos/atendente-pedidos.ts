@@ -16,13 +16,14 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
   templateUrl: 'atendente-pedidos.html',
 })
 export class AtendentePedidosPage {
-  
+
   statuspedido;
   msg;
   pedidos = [];
   nomecliente;
   buttonstatus;
   data: Date;
+  cor = ["cinza","cinza","cinza","cinza","cinza"]; // cinza
 
   constructor(private alertCtrl: AlertController, public plt: Platform, private localNotifications: LocalNotifications, public actionSheetCtrl: ActionSheetController,public auth:AuthProvider,public navCtrl: NavController, public navParams: NavParams) {
     this.pedidos = [];
@@ -36,9 +37,19 @@ export class AtendentePedidosPage {
 
   ionViewDidLoad() {
     this.pedidos = [];
-    this.init();    
-  } 
+    this.init();
+  }
 
+  avaliar(estrelas: number) {
+    for(var i = 0; i < 5; i++) {
+      this.cor[i] = "cinza";
+    }
+    for(var i = 0; i < estrelas; i++) {
+      this.cor[i] = "gold";
+    }
+
+    // console.log(this.cor);
+  }
 
   init(){
     this.pedidos = [];
@@ -55,7 +66,7 @@ export class AtendentePedidosPage {
     if(this.pedidos.length >= 0){
       this.pedidos = [];
     }
-    this.localNotifications.cancelAll();    
+    this.localNotifications.cancelAll();
     var ref = this.auth.getDataBaseList("users","pedidosAtender");
     ref.once("value",(snapshots)=>{
       for (var item in snapshots.val()) {
@@ -78,12 +89,12 @@ export class AtendentePedidosPage {
     date.setDate(data.data.slice(8,10))
     date.setHours(data.horario.slice(0,2));
     date.setMinutes(data.horario.slice(3,5));
-    
+
     var ha = parseInt(aux.getHours().toString())
     var ph = parseInt(date.getHours().toString())
-    
+
     //console.log(aux.toLocaleString())
-    
+
     atual = parseInt(aux.getFullYear().toString());
     prox=  parseInt( date.getFullYear().toString())
 
@@ -97,27 +108,27 @@ export class AtendentePedidosPage {
     if(atual > prox){
       return false;
     }
-    
+
     atual = parseInt(aux.getDate().toString());
     prox=  parseInt( date.getDate().toString())
 
-    
+
     //console.log("-------------------------------------------------------")
     //console.log("Prox:" + prox ,"-", "atual",atual);
-  
+
     this.data = new Date(date) ;
 
     if( atual <= prox ){
-      
+
       //console.log("Prox:" + ph ,"-", "atual",ha);
-      
+
       if(atual == prox){
         if(ha >= ph ){
           return false;
         }
-      }  
-      return true; 
-      
+      }
+      return true;
+
     }else{
       //console.log("bye")
       return false;
@@ -125,9 +136,9 @@ export class AtendentePedidosPage {
 
    // console.log(date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + date.getHours()+":"+date.getMinutes());
   }
-  
+
   gerarNotificacao(data){
-    
+
 
     this.data.setHours(this.data.getHours()-1);
     var text = "Falta uma hora para antender o cliente " +data.clienteNome + " !";
@@ -154,11 +165,11 @@ export class AtendentePedidosPage {
   getPedidosFromDatabase(id){
     var end = "/Pedidos/"+ id;
     this.auth.getDataBaseEnd(end).on("value",(snap)=>{
-        
+
       var i=0;
       if(this.statuspedido == snap.val().status){
         this.getClienteNameFromDataBase(snap.val().clienteId)
-          
+
         var data= {
             clienteNome: this.nomecliente,
             status:snap.val().status,
@@ -181,7 +192,7 @@ export class AtendentePedidosPage {
           //console.log(snap.val().endereco);
           this.pedidos.push(data);
           i++;
-       
+
       }
       if(i<=0){
         this.msg = true;
@@ -241,7 +252,7 @@ export class AtendentePedidosPage {
 
 
   alertNovoPedido(servico){
-    var msg = "O atendimento do cliente "+ servico.clienteNome + " esta iniciando agora !"; 
+    var msg = "O atendimento do cliente "+ servico.clienteNome + " esta iniciando agora !";
     let alert = this.alertCtrl.create({
       title: 'Iniciando Atendimento' ,
       subTitle: msg,
@@ -254,13 +265,13 @@ export class AtendentePedidosPage {
         }]
     });
     alert.present();
-    
+
   }
-  
+
   mudarStatusFeito(servico){
     var end = "/Pedidos/"+servico.key+"/status";
     var ref = this.auth.getDataBaseEndereco(end).set("Feito").then(()=>{
-      this.loadData();      
+      this.loadData();
     });
   }
 

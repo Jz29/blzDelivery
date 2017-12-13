@@ -1,11 +1,16 @@
 page-servicos {
+
     .card-background-page {
-        
+
           ion-card {
             position: relative;
             text-align: center;
           }
-        
+          img {
+            // -webkit-filter: grayscale(50%);
+            filter: grayscale(50%); // escala de cinza
+          }
+
           .card-title {
             position: absolute;
             top: 36%;
@@ -13,8 +18,9 @@ page-servicos {
             width: 100%;
             font-weight: bold;
             color: #fff;
+            text-shadow: 1px 1px 15px #000000;
           }
-        
+
           .card-subtitle {
             font-size: 1.0em;
             position: absolute;
@@ -22,8 +28,6 @@ page-servicos {
             width: 100%;
             color: #fff;
           }
-        
+
         }
 }
-
-

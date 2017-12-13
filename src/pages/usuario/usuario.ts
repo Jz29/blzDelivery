@@ -5,6 +5,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { LoginPage } from '../../pages/login/login';
 import { Events } from 'ionic-angular';
 import firebase from 'firebase/app';
+
 /**
  * Generated class for the UsuarioPage page.
  *
@@ -22,14 +23,25 @@ export class UsuarioPage {
   public user = {} as UserInterface;
   public auxTelefone:string;
   public passwordAux:string;
-  regiao; cep; quadra; numero; referencia; 
-  
+  regiao; cep; quadra; numero; referencia;
+  localizacaoAtual: string = "https://www.google.com/maps/place/Palmas Tocantins ";
+
   constructor( public alertCtrl: AlertController ,public events: Events, public authProv:AuthProvider, public navCtrl: NavController, public navParams: NavParams) {
-   
+
   }
 
   ionViewDidLoad(){
     this.carregarDados();
+  }
+
+  localizacao() {
+    this.localizacaoAtual = "https://www.google.com/maps/place/Palmas Tocantins ";
+    if (this.quadra != null)
+      this.localizacaoAtual = this.localizacaoAtual + "Q. " + this.quadra;
+    if (this.regiao != null)
+      this.localizacaoAtual = this.localizacaoAtual + " " + this.regiao;
+    if (this.referencia != null)
+      this.localizacaoAtual = this.localizacaoAtual + " " + this.referencia;
   }
 
   teste(){
@@ -45,13 +57,13 @@ export class UsuarioPage {
         if(i>=snapshots.numChildren()){
           resolve("end");
         }
-        
+
       });
     }).then((fromresolve)=>{
       console.log(fromresolve);
     });
   }
-  
+
   initDados(){
     this.auxTelefone = "Novo numero";
     this.regiao = "";
@@ -90,7 +102,7 @@ export class UsuarioPage {
       this.user.telefone = snapshot.val().telefone;
       this.user.email = snapshot.val().email;
       this.user.tipo = snapshot.val().usertype;
-      
+
       var end = snapshot.val().endereco;
       if(end != null){
         this.regiao = end.regiao;
@@ -105,6 +117,7 @@ export class UsuarioPage {
     }, (error)=> {
       console.log("Error: " + error.code);
     });
+    this.localizacao();
   }
 
   deslogarUser(){
@@ -123,17 +136,17 @@ export class UsuarioPage {
             this.authProv.deslogarUsuario().then((func)=>{
               //this.navCtrl.popToRoot();
               this.events.publish('event:logout');
-            }); 
+            });
           }
         }
       ]
     });
     confirm.present();
-    
+
   }
 
   atualizarDados(user){
-
+    this.localizacao();
   }
 
   redefinirSenha(user){
@@ -150,7 +163,7 @@ export class UsuarioPage {
         {
           text: 'Aceitar',
           handler: () => {
-            this.authProv.redefinirSenha(this.user.email);            
+            this.authProv.redefinirSenha(this.user.email);
           }
         }
       ]
@@ -159,15 +172,16 @@ export class UsuarioPage {
   }
 
   salvarEndereco(){
+    this.localizacao();
     var ref = this.authProv.getDataBase("users","data/endereco");
     var key = this.authProv.usuarioId();
-
     var endereco = {
       regiao:this.regiao,
       cep:this.cep,
       quadra:this.quadra,
       numero: this.numero,
-      referencia:this.referencia
+      referencia:this.referencia,
+      localizacao: this.localizacaoAtual,
     };
 
     ref.set(endereco).then(res=>{
@@ -177,9 +191,9 @@ export class UsuarioPage {
     });
     //this.initDados();
     this.carregarDados();
-    
+
   }
 
 
 
-} 
+}

@@ -1,0 +1,77 @@
+<!--
+  Generated template for the CriarservicoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Adicionar novo servico</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+      <ion-label>Escolha o tipo do serviço.</ion-label>
+      <ion-item>
+        <ion-label>Tipo: </ion-label>
+        <ion-select [(ngModel)]="servico.tipo">
+          <ion-option value="Manicure e Pedicure">Manicure e Pedicure</ion-option>
+          <ion-option value="Massagem">Massagem</ion-option>
+          <ion-option value="Cabelo">Cabelo</ion-option>
+          <ion-option value="Depilação">Depilação</ion-option>
+          <ion-option value="Maquiagem">Maquiagem</ion-option>
+          <ion-option value="Sobrancelha">Sobrancelha</ion-option>
+          <ion-option value="Barbeiro">Barbeiro</ion-option>
+        </ion-select>
+      </ion-item>
+  </ion-list>
+
+
+  <ion-list>
+        <ion-label>Escolha as regiões de atendimento.</ion-label>
+        <ion-item>
+          <ion-label>Norte</ion-label>
+          <ion-checkbox [(ngModel)]="n"></ion-checkbox>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label>Sul</ion-label>
+          <ion-checkbox [(ngModel)]="s"></ion-checkbox>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label>Taquaralto</ion-label>
+          <ion-checkbox [(ngModel)]="tq"></ion-checkbox>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Taquarusul</ion-label>
+          <ion-checkbox [(ngModel)]="ts"></ion-checkbox>
+        </ion-item>
+      
+    </ion-list>
+
+      <ion-label> Descrição do serviço</ion-label>
+      <ion-item>
+          <ion-textarea id="myInput"  placeholder="Descrição" type="text" [(ngModel)]="servico.descricao"></ion-textarea>
+      </ion-item>
+      
+      <ion-label> Preço</ion-label>
+      <ion-item>
+          <ion-input type="number" placeholder="R$ " [(ngModel)]="servico.preco"></ion-input>
+      </ion-item>
+
+      <ion-label> Duração em minutos</ion-label>
+      <ion-item>
+          <ion-input type="number" placeholder="min" [(ngModel)]="servico.duracao"></ion-input>
+      </ion-item>
+
+      <div padding>
+          <button ion-button color="primary" block (click)="salvarNovoServico()">Salvar</button>
+      </div>
+
+</ion-content>

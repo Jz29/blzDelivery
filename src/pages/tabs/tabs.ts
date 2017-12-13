@@ -11,13 +11,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class TabsPage {
 
   tab1Root = ServicosPage;
-  tab3Root = UsuarioPage;
   tab2Root = PedidosClientePage;
+  tab3Root = UsuarioPage;
   tabParams;
   params;
   constructor(public navParams:NavParams) {
     this.params = navParams;
-    //var userAux = navParams.get('user'); 
+    //var userAux = navParams.get('user');
    // userAux.foi();
   }
 }

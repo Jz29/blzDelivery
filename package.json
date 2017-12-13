@@ -44,7 +44,8 @@
     "moment": "^2.19.2",
     "rxjs": "5.4.3",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.18"
+    "zone.js": "0.8.18",
+    "cordova-plugin-googlemaps": "~2.1.1"
   },
   "devDependencies": {
     "@angular/tsc-wrapped": "^4.4.6",
@@ -60,7 +61,10 @@
       "cordova-plugin-whitelist": {},
       "ionic-plugin-keyboard": {},
       "cordova-plugin-fcm": {},
-      "de.appplant.cordova.plugin.local-notification": {}
+      "de.appplant.cordova.plugin.local-notification": {},
+      "cordova-plugin-googlemaps": {
+        "API_KEY_FOR_ANDROID": "AIzaSyBZTjA18RVJqb3wNZO1_1YPeSxEdBrOjQ4"
+      }
     },
     "platforms": [
       "browser"

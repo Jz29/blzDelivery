@@ -29,7 +29,7 @@ export class MyApp {
         },(error)=> {
           console.log("Error: " + error.code);
         });
-        
+
         authObserver.unsubscribe();
       }else{
         this.rootPage = LoginPage;
@@ -50,14 +50,14 @@ export class MyApp {
     this.events.subscribe('event:logout', ()=>{
       const ANIMATION = { animate: true, direction: 'back' };
       //this.navCrt.setRoot(LoginPage);
-      
+
       //this.navCrt.popToRoot();
       //this.app.navPop();
       let nav = this.app.getRootNav();
       nav.setRoot(LoginPage);
       nav.popToRoot();
       this.events.publish('event:clearLoginPage');
-      
+
     });
 
     this.events.subscribe('event:loginUser', ()=>{
@@ -76,5 +76,5 @@ export class MyApp {
 
 
   }
-  
+
 }
